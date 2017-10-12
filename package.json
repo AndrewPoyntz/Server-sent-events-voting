@@ -1,0 +1,23 @@
+{
+  "name": "sse-voting",
+  "version": "0.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon --watch results --watch lib --watch server.js",
+    "postinstall": "npm run copyLibs",
+    "copyLibs": "gulp copyLibs"
+  },
+  "author": "“Andrew <“andrewpoyntz@hotmail.com”> (“http://www.andrewpoyntz.co.uk)",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.16.2",
+    "gulp": "^3.9.1",
+    "nodemon": "^1.12.1"
+  },
+  "dependencies": {
+    "chart.js": "^2.7.0",
+    "jquery": "^3.2.1",
+    "sse-node": "^1.0.2"
+  }
+}
