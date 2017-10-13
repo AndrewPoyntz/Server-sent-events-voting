@@ -3,25 +3,23 @@ $(document).ready(() => {
 	let ctx = $('#results')[0].getContext('2d');
 	let totalVotes = $('#total');
 	let source = new EventSource('/updates');
-
+	let buttonContainer = $('#buttons');
 	let tabsButton = $('#tabs');
 	let spacesButton = $('#spaces');
 
-
-	tabsButton.click(()=>{
+	let vote = (value) => {
 		$.ajax({
 			url: '/vote',
-			data: {option:'tabs'},
+			data: {option:value},
 			success: ()=>{}
 		});
+	};
+	tabsButton.click(()=>{
+		vote('tabs');
 	});
 
 	spacesButton.click(()=>{
-		$.ajax({
-			url: '/vote',
-			data: {option:'spaces'},
-			success: ()=>{}
-		});
+		vote('spaces');
 	});
 
 	source.addEventListener('init', (e)=>{
@@ -52,7 +50,12 @@ $(document).ready(() => {
 				}
 			}
 		});
-	})
+		buttonContainer.html('');
+		for (let option of labels){
+			let newButton = $('<button>').html(option).click(()=>{vote(option)});
+			buttonContainer.append(newButton);
+		}
+	});
 	source.addEventListener('update', (e)=> {
 		let chartData = JSON.parse(e.data);
 		let labels = [];

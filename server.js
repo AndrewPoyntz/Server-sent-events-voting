@@ -47,7 +47,6 @@ function sendDataToClients(){
 }
 
 const server = app.listen(8080, () =>{
-	'use strict';
 	let port = server.address().port;
 	console.log(`server listening at http://localhost:${port}`);
 })
