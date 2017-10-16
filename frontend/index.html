@@ -1,0 +1,39 @@
+<html>
+<title>Chart Admin</title>
+<head>
+	<script src="lib/jquery.js"></script>
+	<link type="text/css" rel="stylesheet" href="admin.css">
+</head>
+<body>
+<h1>Chart Admin</h1>
+<section>
+	<p>Total number of clients connected: <span id="numClients">0</span></p>
+</section>
+
+<section id="currentChart">
+	<h2>Current chart info</h2>
+	<form action="">
+		<p><label for="title">Title:</label> <input type="text" id="title"></p>
+		<p>Options:</p>
+		<table>
+			<tr>
+				<th>Value</th>
+				<th># of votes</th>
+			</tr>
+			<tr>
+				<td><input type="text" id="option1"></td>
+				<td><input type="number" id="option1Votes"></td>
+			</tr>
+			<tr>
+				<td><input type="text" id="option2"></td>
+				<td><input type="number" id="option2Votes"></td>
+			</tr>
+		</table>
+		<section>
+			<p>Total votes: <span id="total">0</span> <button id="reset" type="button">Reset votes</button></p>
+		</section>
+	</form>
+</section>
+</body>
+<script src="lib/admin.js"></script>
+</html>
