@@ -3,37 +3,37 @@
 <head>
 	<script src="lib/jquery.js"></script>
 	<link type="text/css" rel="stylesheet" href="admin.css">
+	<link rel="stylesheet" href="lib/font-awesome.min.css">
+
 </head>
 <body>
-<h1>Chart Admin</h1>
+<h1><i class="fa fa-pie-chart" aria-hidden="true"></i> Chart Admin</h1>
 <section>
 	<p>Total number of clients connected: <span id="numClients">0</span></p>
 </section>
 
-<section id="currentChart">
-	<h2>Current chart info</h2>
-	<form action="">
-		<p><label for="title">Title:</label> <input type="text" id="title"></p>
+<section>
+	<section class="box">
+		<h2><i class="fa fa-line-chart" aria-hidden="true"></i> Current chart stats</h2>
+		<p>Total votes: <span id="total">0</span></p>
+		<p>Title: <span id="currentTitle"></span>
 		<p>Options:</p>
-		<table>
-			<tr>
-				<th>Value</th>
-				<th># of votes</th>
-			</tr>
-			<tr>
-				<td><input type="text" id="option1"></td>
-				<td><input type="number" id="option1Votes"></td>
-			</tr>
-			<tr>
-				<td><input type="text" id="option2"></td>
-				<td><input type="number" id="option2Votes"></td>
-			</tr>
+		<table id="currentChart">
 		</table>
-		<section>
-			<p>Total votes: <span id="total">0</span> <button id="reset" type="button">Reset votes</button></p>
-		</section>
-	</form>
+		<button id="reset" type="button">Reset votes</button>
+	</section>
+	<section class="box">
+		<h2><i class="fa fa-pencil" aria-hidden="true"></i> Update chart info</h2>
+		<form id="chartForm">
+			<p><label for="title">Title:</label> <input type="text" name="title" id="title"></p>
+			<p>Options:</p>
+			<table>
+			</table>
+			<button type="button" id="addNewOption"><i class="fa fa-plus" aria-hidden="true"></i> Add another option</button>
+			<input type="submit" value="Update & reset chart">
+		</form>
+	</section>
 </section>
 </body>
-<script src="lib/admin.js"></script>
+<script src="admin.js"></script>
 </html>

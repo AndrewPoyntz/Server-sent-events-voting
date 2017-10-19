@@ -31,22 +31,25 @@ $(document).ready(() => {
 			data.push(option.votes);
 		}
 		totalVotes.html(chartData.totalVotes);
+		if (myChart){
+			myChart.destroy();
+		}
+		$('#chart label').html(chartData.title);
 		myChart = new Chart(ctx, {
-			type: 'bar',
+			type: 'doughnut',
 			data: {
 				labels: labels,
 				datasets: [{
-					label: chartData.title,
+					backgroundColor: ["blue", "green", "red", "yellow", "orange"],
 					data: data
 				}]
 			},
-			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-					}]
+			options:{
+				title:{
+					display:true
+				},
+				legend:{
+					display:true
 				}
 			}
 		});
@@ -64,10 +67,11 @@ $(document).ready(() => {
 			labels.push(option.name);
 			data.push(option.votes);
 		}
+		console.log(data);
 		totalVotes.html(chartData.totalVotes);
 		myChart.data.datasets[0].data = data;
 		myChart.update();
 	});
 
 
-})
+});

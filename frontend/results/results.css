@@ -1,7 +1,28 @@
 body{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+h1, h2 {
+	margin:0
+}
+.box{
+	padding:1em;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0 0 20px -8px #333;
+	width:30em;
+	float: left;
+	margin: 1em;
+}
 #chart{
 	width:500px;
 	height:300px;
+	text-align: center;
+	padding:1em;
+}
+label{
+	font-weight:bold;
+	font-size: 1.5em;
+	margin-bottom: -1em;
+	display: block;
 }

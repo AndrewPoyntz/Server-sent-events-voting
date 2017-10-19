@@ -4,17 +4,21 @@
 	<script src="../lib/Chart.js"></script>
 	<script src="../lib/jquery.js"></script>
 	<link type="text/css" rel="stylesheet" href="results.css">
+	<link rel="stylesheet" href="../lib/font-awesome.min.css">
 </head>
 <body>
-<h1>Vote results</h1>
-<section id="chart">
-	<canvas id="results"></canvas>
+<section class="box">
+	<h1><i class="fa fa-pie-chart" aria-hidden="true"></i> Vote results</h1>
+	<section id="chart">
+		<label for="results"></label>
+		<canvas id="results"></canvas>
+	</section>
 </section>
-<section>
+<section class="box">
+	<h2><i class="fa fa-check-square-o" aria-hidden="true"></i> Vote</h2>
+	<section id="buttons"></section>
 	<p>Total votes: <span id="total">0</span></p>
 </section>
-<section id="buttons">
-</section>
 </body>
-<script src="../lib/results.js"></script>
+<script src="results.js"></script>
 </html>

@@ -41,7 +41,22 @@ app.get('/vote', (req,res)=>{
 		}
 	}
 	sendDataToAllClients(stringifyVoteData(),'update');
-	res.send(200);
+	res.sendStatus(200);
+});
+app.get('/updateChart', (req,res)=>{
+	global.voteTitle = req.query.voteTitle;
+	global.voteData = req.query.voteData;
+	global.totalVotes = 0;
+	sendDataToAllClients(stringifyVoteData(),'init');
+	res.sendStatus(200);
+});
+app.get('/reset', (req,res)=>{
+	for (let option of global.voteData){
+		option.votes = 0;
+	}
+	global.totalVotes = 0;
+	sendDataToAllClients(stringifyVoteData(),'update');
+	res.sendStatus(200);
 });
 
 function stringifyVoteData () {
