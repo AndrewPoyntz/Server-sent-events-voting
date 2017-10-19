@@ -67,7 +67,6 @@ $(document).ready(() => {
 			labels.push(option.name);
 			data.push(option.votes);
 		}
-		console.log(data);
 		totalVotes.html(chartData.totalVotes);
 		myChart.data.datasets[0].data = data;
 		myChart.update();
