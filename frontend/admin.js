@@ -2,7 +2,7 @@ $(document).ready(() => {
 	let totalVotes = $('#total');
 	let reset = $('#reset');
 	let chartForm = $('#chartForm');
-	let chartFormTable = chartForm.find('table')
+	let chartFormTable = chartForm.find('table');
 	let numClients = $('#numClients');
 	let currentTitle = $('#currentTitle');
 	let chartTitle = $('#title');
@@ -21,12 +21,21 @@ $(document).ready(() => {
 		currentTitle.html(chartData.title);
 		totalVotes.html(chartData.totalVotes);
 	};
+	let setUpRemoveEvents = () => {
+		$('.remove').each(function (){
+			$(this).unbind();
+			$(this).click(function (){
+				$(this).parent().parent().remove();
+			})
+		});
+	};
 
 	reset.click(()=>{
 		$.get('/reset')
 	});
 	addNewOption.click(()=>{
-		chartFormTable.append($('<tr><td><input type="text" name="option' + (currentData.length-1) + '" class="option"></td>'));
+		chartFormTable.append($('<tr><td><input type="text" name="option' + (currentData.length-1) + '" class="option"><button type="button" class="remove">Remove</button> </td>'));
+		setUpRemoveEvents();
 	});
 	chartForm.submit(function() {
 		let newOptions = [];
@@ -55,8 +64,13 @@ $(document).ready(() => {
 			</tr>`));
 		for (let i=0; i < currentData.length; i++) {
 			currentChart.append($('<tr><td class="name' + i + '">' + currentLabels[i] + '</td><td class="votes_' + i + '">' + currentData[i] + '</td></tr>'));
-			chartFormTable.append($('<tr><td><input type="text" name="option' + i + '" class="option" value="'+currentLabels[i]+'"></td>'));
+			if(i>1) {
+				chartFormTable.append($('<tr><td><input type="text" name="option' + i + '" class="option" value="' + currentLabels[i] + '"><button type="button" class="remove" data-option="option'+i+'">Remove</button> </td>'));
+			} else {
+				chartFormTable.append($('<tr><td><input type="text" name="option' + i + '" class="option" value="' + currentLabels[i] + '"></td>'));
+			}
 		}
+		setUpRemoveEvents();
 		chartTitle.val(chartData.title);
 	});
 
