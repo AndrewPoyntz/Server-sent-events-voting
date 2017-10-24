@@ -23,13 +23,13 @@ app.get('/updates', (req,res)=>{
 			delete global.clients[nextID];
 			global.currentClients--;
 			sendDataToAllClients(global.currentClients.toString(), 'connectedClients');
-			console.log(global.currentClients + ' client(s) connected');
+			// console.log(global.currentClients + ' client(s) connected');
 		})
 	})(global.nextID++);
 	client.send(stringifyVoteData(),'init');
 	global.currentClients++;
 	sendDataToAllClients(global.currentClients.toString(), 'connectedClients');
-	console.log(global.currentClients + ' client(s) connected');
+	//console.log(global.currentClients + ' client(s) connected');
 
 });
 
