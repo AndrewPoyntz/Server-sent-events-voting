@@ -9,10 +9,11 @@ h1, h2 {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	box-shadow: 0 0 20px -8px #333;
-	width:30em;
-	height: 22em;
+	width:calc(100vw - 1em);
+	max-width:50em;
 	float: left;
 	margin: 1em;
+	box-sizing: border-box;
 }
 table{
 	width:15em;
@@ -27,4 +28,9 @@ table tr:nth-child(even){
 table td,table th{
 	padding:0.5em;
 	border:1px solid #ccc;
+}
+@media only screen and (max-device-width: 736px){
+	.box {
+		margin:1em 0;
+	}
 }

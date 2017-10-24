@@ -10,13 +10,14 @@ h1, h2 {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	box-shadow: 0 0 20px -8px #333;
-	width:30em;
+	width:calc(100vw - 1em);
+	max-width:50em;
 	float: left;
 	margin: 1em;
+	box-sizing: border-box;
 }
 #chart{
-	width:500px;
-	height:300px;
+	width:100%;
 	text-align: center;
 }
 label{
@@ -24,4 +25,9 @@ label{
 	font-size: 1.5em;
 	margin-bottom: -1em;
 	display: block;
+}
+@media only screen and (max-device-width: 736px){
+	.box {
+		margin:1em 0;
+	}
 }
