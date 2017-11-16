@@ -1,5 +1,7 @@
 const express = require('express');
 const SSE = require('sse-node');
+const https = require('https');
+const fs = require('fs');
 const app = express();
 global.clients = {};
 global.nextID = 0;
@@ -67,8 +69,8 @@ function sendDataToAllClients(value, event){
 		global.clients[clientID].send(value, event);
 	}
 }
-
-const server = app.listen(8080, () =>{
-	let port = server.address().port;
-	console.log(`server listening at http://localhost:${port}`);
-});
+const options = {
+	cert: fs.readFileSync('./server.crt'),
+	key: fs.readFileSync('./server.key')
+};
+https.createServer(options, app).listen(443);
