@@ -29,6 +29,10 @@ table td,table th{
 	padding:0.5em;
 	border:1px solid #ccc;
 }
+button, input[type=submit]{
+	padding:0.6em;
+	cursor: pointer;
+}
 @media only screen and (max-device-width: 736px){
 	.box {
 		margin:1em 0;

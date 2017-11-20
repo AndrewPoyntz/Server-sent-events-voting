@@ -26,6 +26,62 @@ label{
 	margin-bottom: -1em;
 	display: block;
 }
+#noVotes{
+	margin-top:2em;
+}
+#buttons {
+	margin-top:1em;
+}
+[data-wipe] {
+	margin-left: 1em;
+	display: inline-block;
+	padding: 12px 18px;
+	text-decoration: none;
+	position: relative;
+	border: 1px solid #0a0a0c;
+	border-radius: 4px;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+	text-align: left;
+	color: #fff;
+	overflow: hidden;
+	background: #3285F9;
+	box-shadow: 0 0 9px -1px #333;
+	cursor: pointer;
+}
+[data-wipe]:before, [data-wipe]:after {
+	content: attr(data-wipe);
+	padding-top: inherit;
+	padding-bottom: inherit;
+	white-space: nowrap;
+	position: absolute;
+	top: 0;
+	overflow: hidden;
+	color: #F1F1F2;
+	background: #445561;
+}
+[data-wipe]:before {
+	left: 0;
+	text-indent: 18px;
+	width: 0;
+}
+[data-wipe]:after {
+	padding-left: inherit;
+	padding-right: inherit;
+	left: 100%;
+	text-indent: calc(-100% - 36px);
+	transition: 0.2s ease-in;
+}
+[data-wipe]:hover:before {
+	width: 100%;
+	transition: width 0.2s ease-out;
+}
+[data-wipe]:hover:after {
+	left: 0;
+	text-indent: 0;
+	transition: 0s 0.2s ease-in;
+}
+
 @media only screen and (max-device-width: 736px){
 	.box {
 		margin:1em 0;

@@ -18,7 +18,7 @@ app.get('/',(req,res)=>{
 	res.sendFile(__dirname+'/frontend/index.html');
 });
 app.get('/updates', (req,res)=>{
-	let client = SSE(req, res);
+	let client = SSE(req, res, {ping:45000});
 	global.clients[nextID] = client;
 	((nextID)=>{
 		client.onClose(()=>{
@@ -69,6 +69,7 @@ function sendDataToAllClients(value, event){
 		global.clients[clientID].send(value, event);
 	}
 }
+
 const options = {
 	cert: fs.readFileSync('./server.crt'),
 	key: fs.readFileSync('./server.key')

@@ -34,6 +34,13 @@ $(document).ready(() => {
 		if (myChart){
 			myChart.destroy();
 		}
+		if (chartData.totalVotes === 0){
+			$('#results').hide();
+			$('#noVotes').show();
+		} else {
+			$('#results').slideDown();
+			$('#noVotes').hide();
+		}
 		$('#chart label').html(chartData.title);
 		myChart = new Chart(ctx, {
 			type: 'doughnut',
@@ -55,14 +62,22 @@ $(document).ready(() => {
 		});
 		buttonContainer.html('');
 		for (let option of labels){
-			let newButton = $('<button>').html(option).click(()=>{vote(option)});
+			let newButton = $('<button data-wipe="'+option+'"></button>').html(option).click(()=>{vote(option)});
 			buttonContainer.append(newButton);
 		}
 	});
 	source.addEventListener('update', (e)=> {
+
 		let chartData = JSON.parse(e.data);
 		let labels = [];
 		let data = [];
+		if (chartData.totalVotes === 0){
+			$('#results').hide();
+			$('#noVotes').show();
+		} else {
+			$('#results').slideDown();
+			$('#noVotes').hide();
+		}
 		for (let option of chartData.voteData) {
 			labels.push(option.name);
 			data.push(option.votes);

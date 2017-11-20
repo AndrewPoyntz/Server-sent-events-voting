@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --watch results --watch lib --watch server.js",
+    "dev": "nodemon --watch frontend --watch server.js",
     "postinstall": "npm run copyLibs",
     "copyLibs": "gulp copyLibs"
   },
