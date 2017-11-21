@@ -42,7 +42,7 @@
 						<ul>
 							<li class="fragment">Only work in one direction</li>
 							<li class="fragment">UTF-8 only, not binary data</li>
-							<li class="fragment">Low(er) browser limit for open connections to the same domain (6) <span class="fragment"> :( - we can get around it though</span></li>
+							<li class="fragment">Low(er) browser limit for open connections to the same domain (6) <span class="fragment"> :(</span></li>
 							<li class="fragment">via HTTP, <span class="fragment">works with HTTP/2 as well</span></li>
 							<li class="fragment">Actually been around longer (since 2006)</li>
 							<li class="fragment">Built in support for re-connections & eventID (more on that later!)</li>
@@ -51,11 +51,11 @@
 					</section>
 					<section>
 						<h3>Browser support</h3>
-						<p>Very good...<span class="fragment"> with <span class="orange">polyfills</span> for IE</span></p>
+						<p>Very good...<span class="fragment" data-fragment-index="1"> with <span class="orange">polyfills</span> for IE</span></p>
 						<table>
 							<tr>
 								<td>&nbsp;</td>
-								<td><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" style="border:none"></td>
+								<td><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" style="border:none" class="fragment" data-fragment-index="0"></td>
 								<td><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" style="border:none"></td>
 								<td><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" style="border:none"></td>
 								<td><img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" style="border:none"></td>
@@ -63,7 +63,7 @@
 							</tr>
 							<tr>
 								<td>Desktop</td>
-								<td><i class="orange fa fa-check"></i> 7+</td>
+								<td><span class="fragment" data-fragment-index="1"><i class="orange fa fa-check"></i> 7+</span></td>
 								<td><i class="green fa fa-check"></i></td>
 								<td><i class="green fa fa-check"></i></td>
 								<td><i class="green fa fa-check"></i></td>
@@ -71,11 +71,11 @@
 							</tr>
 							<tr>
 								<td>Mobile</td>
-								<td><i class="orange fa fa-check"></i></td>
+								<td><i class="orange fa fa-check fragment" data-fragment-index="1"></i></td>
 								<td><i class="green fa fa-check"></i></td>
 								<td><i class="green fa fa-check"></i></td>
 								<td><i class="green fa fa-check"></i></td>
-								<td><i class="orange fa fa-check"></i></td>
+								<td><i class="orange fa fa-check fragment" data-fragment-index="1"></i></td>
 							</tr>
 						</table>
 					</section>
@@ -90,10 +90,19 @@
 					</ul>
 				</section>
 				<section>
-					<section>
-						<h2>How does it work?</h2>
-					</section>
-					<section>
+					<h2>How does it work?</h2>
+				</section>
+				<section>
+						<h2>On the server</h2>
+						<p class="fragment" data-fragment-index="0">construct a plain text response with content type<br>"text/event-stream"</p>
+						<pre class="fragment" data-fragment-index="1"><code data-trim>data: My message\n\n</code></pre>
+						<p class="fragment" data-fragment-index="2">multiline</p>
+						<pre class="fragment" data-fragment-index="2"><code data-trim>data: first line\n
+data: second line\n\n</code></pre>
+						<p class="fragment" data-fragment-index="3">JSON</p>
+						<pre class="fragment" data-fragment-index="3"><code data-trim>data: {"msg":"hello world","id":12345}\n\n</code></pre>
+				</section>
+				<section>
 						<h2>Client code</h2>
 						<pre><code data-trim>
 var source = new EventSource('./myStreamURL');
@@ -110,17 +119,118 @@ source.onerror = function(e) {
   // error occurred;
 };
   </code></pre>
+				</section>
+				<section>
+					<section>
+						<h2>Named events</h2>
+						<p class="fragment" data-fragment-index="1">server</p>
+<pre class="fragment" data-fragment-index="1"><code data-trim>
+event: userInfo\n
+data: {"username": "Andrew123"}\n\n
+event: update\n
+data: {"awesomeData": "12345", "someMoreData": "abcdef"}\n\n</code></pre>
+						<p class="fragment" data-fragment-index="2">client</p>
+						<pre class="fragment" data-fragment-index="2"><code data-trim>
+let source = new EventSource('/myStreamURL');
+source.addEventListener('userInfo', (e)=>{
+    let username = JSON.parse(e.data).username;
+    // username = Andrew123
+}
+source.addEventListener('update', (e)=>{
+    let allData = JSON.parse(e.data);
+    // allData.awesomeData = 12345
+}
+						</code></pre>
 					</section>
 					<section>
-						<h2>On the server</h2>
-						<p class="fragment">construct a plain text response with content type<br>"text/event-stream"</p>
-						<pre class="fragment"><code data-trim>data: My message\n\n</code></pre>
-						<p>multiline</p>
-						<pre class="fragment"><code data-trim>data: first line\n
-data: second line\n\n</code></pre>
-						<p>JSON</p>
-						<pre class="fragment"><code data-trim>data: {"msg":"hello world","id":12345}\n\n</code></pre>
+						<h2>Stayin' alive</h2>
+						<p class="fragment">http timeout varies between browsers</p>
+						<p class="fragment">45 seconds</p>
+						<pre class="fragment"><code data-trim>data:\n\n</code></pre>
+						<p class="fragment">or</p>
+						<pre class="fragment"><code data-trim>comment:\n\n</code></pre>
 					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Examples</h2>
+					</section>
+					<section>
+						<h2>Simple NodeJS</h2>
+						<p class="fragment" style="font-size: small">other languages are available.</p>
+						<p class="fragment">sse-node</p>
+<pre class="fragment"><code data-trim>
+const SSE = require("sse-node"),
+      app = require("express")();
+
+app.get("/sse", (req, res) => {
+    const client = SSE(req, res, {ping:45000});
+    client.send("Hello client!");
+    client.onClose(() => console.log("Bye client!"));
+});
+
+app.listen(80);
+</code>
+</pre>
+					</section>
+					<section>
+						<p>But how do I send data when I want to?</p>
+					</section>
+					<section>
+						<h2>Client connection refs</h2>
+						<pre class="fragment"><code data-trim>
+const SSE = require("sse-node"),
+      app = require("express")();
+global.clients = {};
+global.nextID = 0;
+
+app.get("/sse", (req, res) => {
+    const client = SSE(req, res, {ping:45000});
+    global.clients[nextID] = client;
+    ((nextID)=>{
+        client.onClose(()=>{
+            delete global.clients[nextID];
+        })
+    })(global.nextID++);
+});
+
+</code>
+</pre>
+					</section>
+					<section>
+<pre><code data-trim>
+function sendDataToAllClients(value, event){
+    for (clientID in global.clients){
+        global.clients[clientID].send(value, event);
+    }
+}
+</code>
+</pre>
+<pre><code data-trim class="fragment">
+sendDataToAllClients({myObject:'containing stuff'},'update');
+</code>
+</pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Limitations <span class="fragment">:(</span></h2>
+					</section>
+					<section>
+						<ul>
+							<li>Effectively a http download</li>
+							<li class="fragment">Some proxies may buffer the request</li>
+							<li class="fragment">Results in long delays before data received</li>
+							<li class="fragment">Happens at the Met Office<span class="fragment"> :(</span> <span class="fragment">  (but only via http!)</span></li>
+							<li class="fragment">Solution/workaround:<span class="fragment"> httpS</span> <span class="fragment">:D</span></li>
+						</ul>
+					</section>
+				</section>
+				<section>
+					<p>Audience participation time!</p>
+				</section>
+				<section>
+					Questions?
 				</section>
 			</div>
 		</div>
