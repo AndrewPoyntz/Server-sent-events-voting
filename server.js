@@ -14,6 +14,7 @@ global.totalVotes = 0;
 
 
 app.use(express.static(__dirname+'/frontend/'));
+app.use(express.static(__dirname+'/slides/'));
 app.get('/',(req,res)=>{
 	res.sendFile(__dirname+'/frontend/index.html');
 });
