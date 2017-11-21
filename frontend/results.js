@@ -38,7 +38,7 @@ $(document).ready(() => {
 			$('#results').hide();
 			$('#noVotes').show();
 		} else {
-			$('#results').slideDown();
+			$('#results').fadeIn();
 			$('#noVotes').hide();
 		}
 		$('#chart label').html(chartData.title);
@@ -75,7 +75,7 @@ $(document).ready(() => {
 			$('#results').hide();
 			$('#noVotes').show();
 		} else {
-			$('#results').slideDown();
+			$('#results').fadeIn();
 			$('#noVotes').hide();
 		}
 		for (let option of chartData.voteData) {
@@ -86,6 +86,4 @@ $(document).ready(() => {
 		myChart.data.datasets[0].data = data;
 		myChart.update();
 	});
-
-
 });
