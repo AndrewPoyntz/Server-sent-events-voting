@@ -200,7 +200,7 @@ app.get("/sse", (req, res) => {
 					<section>
 <pre><code data-trim>
 function sendDataToAllClients(value, event){
-    for (clientID in global.clients){
+    for (let clientID in global.clients){
         global.clients[clientID].send(value, event);
     }
 }
