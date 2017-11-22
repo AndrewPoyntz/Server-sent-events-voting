@@ -8,7 +8,6 @@ $(document).ready(() => {
 	let youAre = $('#youAre');
 	let choice = false;
 	source.addEventListener('resetGame', (e)=> {
-		console.log('reset the game?');
 		choice = false;
 	});
 	source.addEventListener('gameState', (e)=> {
@@ -18,7 +17,6 @@ $(document).ready(() => {
 		$('.red-line').removeClass('active');
 
 		let gameState = JSON.parse(e.data);
-		console.log(JSON.stringify(gameState));
 		xTaken = gameState.xTaken;
 		oTaken = gameState.oTaken;
 		gameLive = xTaken && oTaken;
@@ -30,7 +28,7 @@ $(document).ready(() => {
 		(xTaken)? claimXButton.hide(): claimXButton.show();
 		(oTaken)? claimOButton.hide(): claimOButton.show();
 		if (choice){
-			youAre.html('You are: '+choice.toUpperCase());
+			youAre.html('You\'re playing as: <span>'+choice.toUpperCase()+'</span>');
 		} else if (gameLive) {
 			youAre.html('You are an observer');
 		} else {

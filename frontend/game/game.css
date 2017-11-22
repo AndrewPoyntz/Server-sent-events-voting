@@ -1,5 +1,6 @@
 body{
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: center;
 }
 
 .boxes {
@@ -187,4 +188,15 @@ body{
 	text-transform: uppercase;
 	width:3em;
 	float: right;
+}
+.reset{
+	width:6em;
+}
+#youAre{
+	font-size:2em;
+}
+#youAre span{
+	font-weight:bold;
+	text-shadow: 1px 1px 3px #333;
+	font-size: 1.6em;
 }
