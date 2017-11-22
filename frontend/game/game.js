@@ -2,7 +2,7 @@ $(document).ready(() => {
 	let xTaken = false;
 	let oTaken = false;
 	let gameLive = false;
-	let source = new EventSource('/gameUpdates');
+	let source = new EventSource('./gameUpdates');
 	let claimXButton = $('#x');
 	let claimOButton = $('#o');
 	let youAre = $('#youAre');
@@ -57,7 +57,7 @@ $(document).ready(() => {
 	});
 	let claim = (value) => {
 		$.ajax({
-			url: '/claim',
+			url: './claim',
 			data: {choice:value},
 			success: ()=>{}
 		});
@@ -73,7 +73,7 @@ $(document).ready(() => {
 	$('.box').click(function() {
 		if (choice && gameLive) {
 			$.ajax({
-				url: '/updateGameState',
+				url: './updateGameState',
 				data: {square:$(this).attr('id'), val:choice},
 				success: ()=>{}
 			});
@@ -151,7 +151,7 @@ $(document).ready(() => {
 	};
 	reset = function (){
 		$.ajax({
-			url: '/resetGame',
+			url: './resetGame',
 			success: ()=>{}
 		});
 	};
