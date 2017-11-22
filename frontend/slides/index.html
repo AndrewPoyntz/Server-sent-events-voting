@@ -34,19 +34,39 @@
 				</section>
 				<section>
 					<section>
+						<p>How do we keep the data in our FE clients current?</p>
+						<ul>
+							<li class="fragment">Polling
+								<ul>
+									<li class="fragment">Easiest option</li>
+									<li class="fragment">Simple</li>
+									<li class="fragment">Not real-time <span class="fragment"> 😢 </span></li>
+									<li class="fragment">Tricky to test <span class="fragment"> 😢</span></li>
+								</ul>
+							</li>
+							<li class="fragment">Websockets
+								<ul>
+									<li class="fragment">Shiny! <span class="fragment">😄</span></li>
+									<li class="fragment">Complex to implement (extra ports etc) <span class="fragment"> 😢</span> </li>
+								</ul>
+							</li>
+							<li class="fragment">Server-sent events <span class="fragment">😕</span></li>
+						</ul>
+					</section>
+					<section>
 						<h3>What is it?</h3>
-						<p class="fragment"><span class="fragment strike">websockets?</span></p>
+						<p class="fragment"><span class="fragment strike">websockets</span></p>
 					</section>
 					<section>
 						<p>Differences to web sockets</p>
 						<ul>
 							<li class="fragment">Only work in one direction</li>
 							<li class="fragment">UTF-8 only, not binary data</li>
-							<li class="fragment">Low(er) browser limit for open connections to the same domain (6) <span class="fragment"> :(</span></li>
-							<li class="fragment">via HTTP, <span class="fragment">works with HTTP/2 as well</span></li>
+							<li class="fragment">Low(er) browser limit for open connections to the same domain (6)</li>
+							<li class="fragment">via HTTP<span class="fragment">, works with HTTP/2 as well</span></li>
 							<li class="fragment">Actually been around longer (since 2006)</li>
-							<li class="fragment">Built in support for re-connections & eventID (more on that later!)</li>
-							<li class="fragment">Faster responses</li>
+							<li class="fragment">Built in support for re-connections</li>
+							<li class="fragment">Faster</li>
 						</ul>
 					</section>
 					<section>
@@ -142,14 +162,6 @@ source.addEventListener('update', (e)=>{
 }
 						</code></pre>
 					</section>
-					<section>
-						<h2>Stayin' alive</h2>
-						<p class="fragment">http timeout varies between browsers</p>
-						<p class="fragment">45 seconds</p>
-						<pre class="fragment"><code data-trim>data:\n\n</code></pre>
-						<p class="fragment">or</p>
-						<pre class="fragment"><code data-trim>comment:\n\n</code></pre>
-					</section>
 				</section>
 				<section>
 					<section>
@@ -158,7 +170,7 @@ source.addEventListener('update', (e)=>{
 					<section>
 						<h2>Simple NodeJS</h2>
 						<p class="fragment" style="font-size: small">other languages are available.</p>
-						<p class="fragment">sse-node</p>
+						<p class="fragment">express & sse-node</p>
 <pre class="fragment"><code data-trim>
 const SSE = require("sse-node"),
       app = require("express")();
@@ -217,20 +229,32 @@ sendDataToAllClients({myObject:'containing stuff'},'update');
 						<h2>Limitations <span class="fragment">:(</span></h2>
 					</section>
 					<section>
+						<p>Need to send keep alive messages</p>
+						<p class="fragment">http timeout varies between browsers</p>
+						<p class="fragment">45 seconds</p>
+						<pre class="fragment"><code data-trim>data:\n\n</code></pre>
+						<p class="fragment">or</p>
+						<pre class="fragment"><code data-trim>comment:\n\n</code></pre>
+					</section>
+					<section>
 						<ul>
 							<li>Effectively a http download</li>
 							<li class="fragment">Some proxies may buffer the request</li>
 							<li class="fragment">Results in long delays before data received</li>
-							<li class="fragment">Happens at the Met Office<span class="fragment"> :(</span> <span class="fragment">  (but only via http!)</span></li>
-							<li class="fragment">Solution/workaround:<span class="fragment"> httpS</span> <span class="fragment">:D</span></li>
+							<li class="fragment">Happens at the Met Office<span class="fragment">  😢</span> <span class="fragment">  (but only via http!)</span></li>
+							<li class="fragment">Solution/workaround:<span class="fragment"> httpS</span> <span class="fragment">😄</span></li>
 						</ul>
 					</section>
 				</section>
 				<section>
 					<p>Audience participation time!</p>
+					<p class="fragment">http://bit.ly/2B3Vtna</p>
+					<p class="fragment">https://35.177.43.164</p>
+					<a href="../" target="_blank" class="fragment">linky</a>
 				</section>
 				<section>
-					Questions?
+					<p>Thanks!</p>
+					<p class="small fragment">Demos & slides: <br>https://github.com/AndrewPoyntz/server-sent-events-voting</p>
 				</section>
 			</div>
 		</div>
