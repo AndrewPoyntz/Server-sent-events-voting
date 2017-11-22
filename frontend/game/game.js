@@ -34,7 +34,7 @@ $(document).ready(() => {
 		} else if (gameLive) {
 			youAre.html('You are an observer');
 		} else {
-			youAre.html('Game is pending')
+			youAre.html('Game is waiting for players')
 		}
 
 		for (let square in gameState.squares){
@@ -115,7 +115,7 @@ $(document).ready(() => {
 			$('.bottom-hor').addClass('active');
 			$('.x-wins').addClass('active');
 		} else if(  oChild7 && oChild8 && oChild9 ){
-			$('.mid-hor').addClass('active');
+			$('.bottom-hor').addClass('active');
 			$('.o-wins').addClass('active');
 		} else if(  xChild1 && xChild4 && xChild7 ){
 			$('.left-vert').addClass('active');
